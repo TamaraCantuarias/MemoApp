@@ -34,19 +34,20 @@ public class VentanaActivity extends AppCompatActivity{
         //Establecer diseño de la ventana
         setContentView(R.layout.activity_ventana);
 
-
-
     }
-            //utilizamos el metodo onClick.
-            public void onClickpuntuacion(View View){
-            Intent intent = new Intent(this, puntuacion.class);
-            startActivity(intent);
-
+    //utilizamos el metodo onClick.
+    public void onClickpuntuacion(View View){
+        Intent intent = new Intent(this, puntuacion.class);
+        startActivity(intent);
     }
-            public void onClickmapa(View View){
-            Intent intent = new Intent(this, MapaActivity.class);
-            startActivity(intent);
-}
+    public void onClickmapa(View View){
+        Intent intent = new Intent(this, MapaActivity.class);
+        startActivity(intent);
+    }
+    public void onClickModificar(View view){
+        Intent intent = new Intent(this, modificarActivity.class);
+        startActivity(intent);
+    }sl
 }
 
 
