@@ -1,155 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VentanaActivity">
+    android:padding="8dp">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Galeria"
-        android:textColor="#000000"
-        android:textSize="35sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:layout_width="389dp"
-        android:layout_height="500dp"
-        android:layout_marginBottom="119dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toStartOf="parent">
+        android:showDividers="middle">
 
-
-        <androidx.cardview.widget.CardView
+        <!-- Título de la galería -->
+        <TextView
+            android:id="@+id/tituloGaleria"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="Galería"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000"/>
 
-            <LinearLayout
-                android:layout_width="369dp"
+        <!-- Contenido de la galería -->
+        <LinearLayout
+            android:id="@+id/recuerdo1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/white"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/imagenOso"
+                android:layout_width="90dp"
+                android:layout_height="148dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="Imagen de oso"
+                android:scaleType="centerCrop"
+                android:src="@drawable/oso" />
+
+            <TextView
+                android:id="@+id/textViewLugar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp"
+                android:text="Lugar: parque "
+                android:textSize="14sp" />
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/gato" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Lugar: Casa"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="gato pequeño"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Modificiar"
-            android:onClick="onClickModificar"
-        />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="386dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="159dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="parent">
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textViewDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="Descripción: un lindo gato cafe "
+                android:textSize="14sp" />
 
             <LinearLayout
-                android:layout_width="368dp"
-                android:layout_height="82dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/oso" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnModificarOso"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginEnd="8dp"
+                    android:text="Modificar" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Lugar: Parque"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="lindo gato"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
+                <Button
+                    android:id="@+id/btnEliminarOso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Eliminar" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recuerdo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:elevation="2dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/imagenGato"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:contentDescription="Imagen de gato"
+                android:scaleType="centerCrop"
+                android:src="@drawable/gato"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewLugar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lugar: casa "
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/textViewDescripcion2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción: un lindo gato pequeño "
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnModificarGato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modificar"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnEliminarGato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Eliminar" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Opciones -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickpuntuacion"
+            android:text="Puntuación de la aplicación"
+            android:layout_marginBottom="4dp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modificiar"
-            android:onClick="onClickModificar"/>
+            android:onClick="onClickmultimedia"
+            android:text="Ver videos"
+            android:layout_marginBottom="4dp" />
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="8dp"
             android:onClick="onClickmapa"
-            android:text="Tus ultimos lugares visitados" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:onClick="onClickpuntuacion"
-            android:text="Puntiacion de aplicacion" />
-
-
-
+            android:text="Tus últimos lugares visitados" />
     </LinearLayout>
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

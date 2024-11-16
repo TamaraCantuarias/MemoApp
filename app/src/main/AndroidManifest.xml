@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<!-- Agrego los permisos de Internet y Localizacion -->
+    <!-- Agrego los permisos de Internet y Localización -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -16,19 +19,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MemoApp"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VentanaActivity"></activity>
+
+        <!-- Actividad VentanaActivity ahora exportada -->
+        <activity
+            android:name=".VentanaActivity"
+            android:exported="true">
+            <!-- Si es necesario, puedes agregar un intent-filter -->
+        </activity>
+
         <activity android:name=".modificarActivity"></activity>
         <activity android:name=".puntuacion"></activity>
         <activity android:name=".MapaActivity"></activity>
+        <activity android:name=".Multimedia"></activity>
+        <activity android:name=".Registro"></activity>
     </application>
 
 </manifest>

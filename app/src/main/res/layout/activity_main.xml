@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="203dp"
         android:layout_height="203dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/inicio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,10 +21,11 @@
     <LinearLayout
         android:layout_width="386dp"
         android:layout_height="500dp"
+        android:layout_marginBottom="4dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -48,8 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:inputType="textPassword" />
 
 
         <Button
@@ -60,6 +60,16 @@
             android:backgroundTint="#D5C3F4"
             android:onClick="onClickVentana"
             android:text="Acceder"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/botonRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="#D5C3F4"
+            android:onClick="onClickregistro"
+            android:text="Registrase"
             android:textColor="@color/black" />
 
 
