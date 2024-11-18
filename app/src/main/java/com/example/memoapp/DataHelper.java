@@ -1,26 +1,57 @@
 package com.example.memoapp;
-// importamos las librerias para manejar bases de datos
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.jetbrains.annotations.Nullable;
+import androidx.annotation.Nullable;
 
+public class DataHelper extends SQLiteOpenHelper {
 
-public class DataHelper extends SQLiteOpenHelper{
-    public DataHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version){
-        super(context, name, factory, 4); // Cambia el número de versión aquí (de 1 a 2)
+    public DataHelper(@Nullable Context context) {
+        super(context, "puntuacionDB", null, 1);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE usuario(correo TEXT PRIMARY KEY, nombre TEXT, direccion TEXT, comuna TEXT, nota INTEGER)");
+        // Crear tabla de puntuaciones
+        db.execSQL("CREATE TABLE puntuacion (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "descripcion TEXT NOT NULL, " +
+                "comentario TEXT NOT NULL, " +
+                "estrellas REAL NOT NULL)");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        db.execSQL("DROP TABLE IF EXISTS usuario");
-        db.execSQL("CREATE TABLE usuario(correo TEXT PRIMARY KEY, nombre TEXT, direccion TEXT, comuna TEXT, nota INTEGER)");
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS puntuacion");
+        onCreate(db);
+    }
+
+    // Método para actualizar puntuación
+    public int actualizarPuntuacion(int id, String descripcion, String comentario, float estrellas) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("descripcion", descripcion);
+        values.put("comentario", comentario);
+        values.put("estrellas", estrellas);
+
+        // Actualizar la puntuación por ID
+        int rowsAffected = db.update("puntuacion", values, "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+        return rowsAffected;  // Devuelve el número de filas actualizadas
+    }
+
+    // Método para guardar nueva puntuación
+    public void guardarPuntuacion(String descripcion, String comentario, float estrellas) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("descripcion", descripcion);
+        values.put("comentario", comentario);
+        values.put("estrellas", estrellas);
+
+        db.insert("puntuacion", null, values);
+        db.close();
     }
 }

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -51,6 +53,32 @@ public class Registro extends AppCompatActivity {
 
         // Cargar registros existentes
         leerRegistros();
+        // Establecer el listener para detectar clics en los elementos
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Obtener el elemento seleccionado
+                String itemSeleccionado = registrosList.get(position);
+
+                mostrarDatosSeleccionados(itemSeleccionado);
+            }
+        });
+    }
+
+    private void mostrarDatosSeleccionados(String item) {
+        //Divido los datos
+        String[] datos = item.split("\\|\\|");
+        edtCorreo.setText(datos[0]);
+        edtNom.setText(datos[1]);
+        edtContrasena.setText(datos[3]);
+
+
+        for (int i = 0; i < comunas.length; i++) {
+            if(comunas[i].equals(datos[2])){
+                spSpinner.setSelection(i);
+                break;
+            }
+        }
     }
 
     // Método para agregar un registro
@@ -81,20 +109,67 @@ public class Registro extends AppCompatActivity {
             registrosList.add(nuevoRegistro);
             guardarRegistros();
 
-            // Actualizar la lista
-            listaAdapter.notifyDataSetChanged();
-
             // Mostrar confirmación
             Toast.makeText(this, "Registro agregado con éxito", Toast.LENGTH_LONG).show();
 
-            // Limpiar campos
-            edtCorreo.setText("");
-            edtNom.setText("");
-            edtContrasena.setText("");
+            recargarLista();
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Error al agregar el registro", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void recargarLista(){
+        // Obtener datos ingresados
+        String correo = edtCorreo.getText().toString().trim();
+        String nombre = edtNom.getText().toString().trim();
+        String contrasena = edtContrasena.getText().toString().trim();
+        String comuna = spSpinner.getSelectedItem().toString();
+
+        // Actualizar la lista
+        listaAdapter.notifyDataSetChanged();
+
+
+        // Limpiar campos
+        edtCorreo.setText("");
+        edtNom.setText("");
+        edtContrasena.setText("");
+    }
+
+    //Metodo para modificar un campo
+    public void onClickModificar(View view){
+        //Obtener datos ingresados
+        String correo = edtCorreo.getText().toString().trim();
+        String nombre = edtNom.getText().toString().trim();
+        String contrasena = edtContrasena.getText().toString().trim();
+        String comuna = spSpinner.getSelectedItem().toString();
+
+        boolean encontrado = false;
+
+        //Itero sobre la lista de usuarios
+        for (int i = 0; i < registrosList.size(); i++) {
+            //Divido los datos
+            String[] datos = registrosList.get(i).split("\\|\\|");
+
+            //Verifico que el correo ingresado sea igual al almacenado
+            if(datos[0].equals(correo)){
+                //Actualizar datos
+                datos[1] = nombre;
+                datos[2] = comuna;
+                datos[3] = contrasena;
+                registrosList.set(i,datos[0]+"||"+datos[1]+"||"+datos[2]+"||"+datos[3]);
+                Toast.makeText(this, "Registro modificado con éxito", Toast.LENGTH_LONG).show();
+                guardarRegistros();
+                recargarLista();
+                encontrado = true;
+                break;
+            }
+        }
+        if(!encontrado){
+            Toast.makeText(this, "No existe un usuario con el correo: "+correo, Toast.LENGTH_LONG).show();
+        }
+
     }
 
     // Método para leer los registros almacenados
@@ -159,11 +234,14 @@ public class Registro extends AppCompatActivity {
         }
 
         for (int i = 0; i < registrosList.size(); i++) {
-            if (registrosList.get(i).startsWith(correo + "||")) {
+            //Divido los datos
+            String[] datos = registrosList.get(i).split("\\|\\|");
+            if (datos[0].equals(correo)) {
                 registrosList.remove(i);
                 guardarRegistros();
                 listaAdapter.notifyDataSetChanged();
                 Toast.makeText(this, "Registro eliminado con éxito", Toast.LENGTH_LONG).show();
+                recargarLista();
                 return;
             }
         }

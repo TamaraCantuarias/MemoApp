@@ -29,11 +29,11 @@
             </intent-filter>
         </activity>
 
-        <!-- Actividad VentanaActivity ahora exportada -->
+        <!-- Actividad VentanaActivity  -->
         <activity
             android:name=".VentanaActivity"
             android:exported="true">
-            <!-- Si es necesario, puedes agregar un intent-filter -->
+
         </activity>
 
         <activity android:name=".modificarActivity"></activity>
@@ -41,6 +41,8 @@
         <activity android:name=".MapaActivity"></activity>
         <activity android:name=".Multimedia"></activity>
         <activity android:name=".Registro"></activity>
+        <activity android:name=".RecomendacionesActivity"></activity>
+
     </application>
 
 </manifest>
